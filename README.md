@@ -1,14 +1,67 @@
-# Projet SQL — "Ligue des Champions UEFA" : Gestion de Compétition Européenne
+# ⚽ Projet SQL — Ligue des Champions UEFA (Phase de Groupes)
 
-## 1. Sujet et Contexte
-Cette base de données relationnelle est conçue pour gérer l'intégralité de la **Ligue des Champions UEFA**. 
-Le système ne se contente pas de planifier les rencontres européennes ; il gère les effectifs des grands clubs, l'affectation des stades à travers l'Europe, les scores finaux, ainsi que les événements détaillés de chaque match (buts, cartons jaunes, cartons rouges). Cette granularité permet de générer des classements dynamiques pour la phase de groupes et des statistiques poussées sur les joueurs et les équipes.
+## Sujet et Contexte
 
-## 2. Utilisateurs Cibles
-Cette base de données est destinée à :
-* **L'UEFA (Admins) :** Pour planifier les matchs, assigner les arbitres/stades et vérifier la validité des effectifs européens.
-* **Les journalistes et analystes sportifs :** Pour extraire des statistiques complexes (meilleurs buteurs de la compétition, équipes avec la meilleure attaque, affluences par pays).
-* **Les supporters (via une application web) :** Pour consulter les résultats, les classements de poules et l'historique des événements de match en temps réel.
+La **Ligue des Champions UEFA** est la compétition de clubs la plus prestigieuse du football européen. Ce projet modélise la **phase de groupes** d'une édition simplifiée de la compétition.
 
-## 3. Sources de Données
-Afin d'obtenir un jeu de données réaliste, les données seront générées de manière synthétique via un script Python utilisant la librairie `Faker`. Des listes personnalisées seront intégrées pour utiliser de vrais noms de clubs européens (ex: FC Barcelone, Bayern Munich, Manchester City), de vrais stades (Camp Nou, Allianz Arena) et des joueurs existants. Les scores et événements seront générés aléatoirement mais de façon logique. Un fichier `seed.sql` sera généré pour le peuplement de la base.
+Le problème que cette base résout est le suivant : comment organiser, stocker et analyser les données d'une compétition de football ? À partir d'un petit nombre de tables bien reliées, on peut retrouver les résultats des matchs, calculer les classements de chaque groupe, identifier les meilleurs buteurs, et bien plus encore.
+
+**Périmètre volontairement réduit :**
+- Une seule saison (2024–2025)
+- Phase de groupes uniquement (pas de phase à élimination directe)
+- 4 groupes de 4 équipes = **16 équipes**
+- Chaque équipe joue 3 matchs (un contre chaque adversaire du groupe) = **24 matchs au total**
+
+Ce choix de simplification permet de garder le projet **lisible et compréhensible** tout en offrant assez de données pour des requêtes SQL intéressantes.
+
+## Utilisateurs Cibles
+
+| Utilisateur | Usage |
+|-------------|-------|
+| **Organisateur (UEFA)** | Planifier les matchs, enregistrer les résultats et les événements |
+| **Journaliste sportif** | Consulter les statistiques : meilleurs buteurs, classements, cartons |
+| **Supporter** | Voir les résultats de son équipe, le classement de son groupe |
+
+## Structure du Projet
+
+```
+projet_ucl/
+├── README.md          ← Ce fichier
+├── DESIGN.md          ← Conception et diagramme ER
+├── schema.sql         ← Création des tables, index et vues
+├── seed.sql           ← Peuplement de la base (INSERT INTO)
+├── queries.sql        ← Requêtes de manipulation quotidienne
+├── analysis.sql       ← Requêtes d'analyse et statistiques
+└── ucl.db             ← Base de données SQLite générée
+```
+
+## Sources de Données
+
+Les données sont **générées à la main** de manière réaliste :
+- Les **noms de clubs et stades** sont inspirés de vrais clubs européens
+- Les **noms de joueurs** sont fictifs mais réalistes
+- Les **scores et événements** (buts, cartons) sont inventés de façon cohérente
+
+Aucune API externe ni script Python n'est nécessaire. Le fichier `seed.sql` contient directement tous les `INSERT INTO`.
+
+## Moteur de Base de Données
+
+**SQLite** — choisi pour sa simplicité (pas de serveur à installer).
+
+Pour recréer la base depuis zéro :
+```bash
+sqlite3 ucl.db < schema.sql
+sqlite3 ucl.db < seed.sql
+```
+
+Pour tester les requêtes :
+```bash
+sqlite3 ucl.db < queries.sql
+sqlite3 ucl.db < analysis.sql
+```
+
+## Technologies et Ressources
+
+- [SQLite Documentation](https://www.sqlite.org/docs.html)
+- [DB Browser for SQLite](https://sqlitebrowser.org/)
+- [Mermaid — Diagrammes ER](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)

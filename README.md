@@ -1,8 +1,8 @@
-# ⚽ Projet Final SQL — Ligue des Champions UEFA (Phase de Groupes)
+# ⚽ Projet SQL — Ligue des Champions UEFA (Phase de Groupes)
 
 ## Sujet et Contexte
 
-La **Ligue des Champions UEFA** est la compétition de clubs la plus prestigieuse du football européen. Ce projet modélise la **phase de groupes** d'une édition simplifiée de la compétition.
+Etant amateur de football dépuis toujours et un grand fan de F.C. Barcelonne. Je souhaite éffectuer mon projer en rapport avec la **Ligue des Champions UEFA** qui est la compétition de clubs la plus prestigieuse du football européen. Ce projet modélise la **phase de groupes** d'une édition simplifiée de la compétition.
 
 Le problème que cette base résout est le suivant : comment organiser, stocker et analyser les données d'une compétition de football ? À partir de 5 tables bien reliées, on peut retrouver les résultats des matchs, calculer les classements de chaque groupe, identifier les meilleurs buteurs, et suivre la discipline des joueurs.
 
@@ -35,7 +35,7 @@ Le problème que cette base résout est le suivant : comment organiser, stocker 
 
 ```
 projet_ucl/
-├── README.md          ← Ce fichier (présentation du projet)
+├── README.md          ← présentation du projet
 ├── DESIGN.md          ← Conception : entités, relations, diagramme ER, choix et limitations
 ├── schema.sql         ← Création des 5 tables, 8 index et 1 vue (classement)
 ├── seed.sql           ← Peuplement : 16 équipes, 160 joueurs, 24 matchs, 62 buts, 34 cartons
@@ -46,7 +46,7 @@ projet_ucl/
 
 ## Sources de Données
 
-Les données utilisent des **informations réelles** pour les clubs :
+Les données sont des **informations réelles** pour les clubs :
 
 | Donnée | Source |
 |--------|--------|
@@ -55,11 +55,11 @@ Les données utilisent des **informations réelles** pour les clubs :
 | Scores et événements (buts, cartons) | **Fictifs**, inventés de manière réaliste et cohérente |
 | Format (4 groupes de 4) | **Simplifié** par rapport au vrai format 2024-2025 (qui utilise une ligue unique de 36 équipes) |
 
-Toutes les données sont contenues dans le fichier `seed.sql` sous forme d'`INSERT INTO`. Aucune API externe ni script Python n'est nécessaire.
+Toutes les données que j'ai utilisé sont contenues dans le fichier `seed.sql` sous forme d'`INSERT INTO`. 
 
 ## Moteur de Base de Données
 
-**SQLite** — choisi pour sa simplicité (pas de serveur à installer).
+J'ai utilisais **SQLite** pour sa simplicité .
 
 ### Recréer la base depuis zéro
 
@@ -82,7 +82,7 @@ sqlite3 -header -column ucl.db < analysis.sql
 
 ## Fonctionnalités SQL Utilisées
 
-Le projet mobilise les fonctionnalités suivantes du langage SQL :
+Mon projet mobilise les fonctionnalités suivantes du langage SQL :
 
 | Fonctionnalité | Où elle est utilisée |
 |----------------|---------------------|
